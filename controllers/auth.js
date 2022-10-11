@@ -1,5 +1,6 @@
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
+const AppError = require('../utils/appError')
 require("dotenv").config();
 
 exports.signup = async (req, res, next) => {
@@ -16,8 +17,7 @@ exports.login = async (req, res, next) => {
         return next(err);
       }
       if (!user) {
-        const error = new Error("Username or password is incorrect");
-        return next(error);
+        return next(new AppError("Username or password is incorrect", 400));
       }
 
       req.login(user, { session: false }, async (error) => {
