@@ -1,6 +1,8 @@
 const express = require('express');
 const passport = require('passport');
 const bodyParser = require('body-parser');
+const AppError = require('./utils/appError')
+const globalErrorHandler = require('./controllers/error')
 
 const booksRoute = require('./routes/books');
 const authRoute = require('./routes/auth');
@@ -24,11 +26,13 @@ app.get('/', (req, res) => {
 });
 
 // Handle errors.
-app.use(function (err, req, res, next) {
-    console.log(err);
-    res.status(err.status || 500);
-    res.json({ error: err.message });
+app.use('*', (req, res, next) => {
+    next(new AppError(`Can't find ${req.originalUrl} on this server`, 400))
+    
 });
+
+app.use(globalErrorHandler)
+
 
 
 
