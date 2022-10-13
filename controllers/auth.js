@@ -1,14 +1,43 @@
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const AppError = require('../utils/appError')
+const sendEmail = require('../utils/email')
 require("dotenv").config();
 
+
+
 exports.signup = async (req, res, next) => {
-  res.json({
-    message: "Signup successful",
-    user: req.user,
-  });
+
+  //SEND A MAIL TO A USER ANYTIME THEY SIGNUP 
+
+  //MESSAGE TO SEND TO USER
+  const message = `Hey champ!\nWelcome to our site, we hope you make the most of your experience!\nWe would be rooting for you from over here!`
+  
+  try{
+
+    // MAIL FUNCTION
+    await sendEmail({
+      email: req.user.email,
+      subject: 'Welcome to Mira site',
+      message
+    })
+
+    // SUCCESS RESPONSE
+    res.json({
+       message: "Signup successful",
+       user: req.user,
+     });
+
+
+  }
+  catch(err){
+    // ERROR BLOCK
+    return next(new AppError('There was an error sending the email, Try again later!', 500))
+  }
+ 
 };
+
+
 
 exports.login = async (req, res, next) => {
   passport.authenticate("login", async (err, user, info) => {
