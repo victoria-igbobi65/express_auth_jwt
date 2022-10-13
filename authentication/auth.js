@@ -30,11 +30,17 @@ passport.use(
     new localStrategy(
         {
             usernameField: 'email',
-            passwordField: 'password'
+            passwordField: 'password',
+
+            // ALLOWS THE REQ PARAMATER TO BE PASSED INTO THE FUNCTION 
+            passReqToCallback: true
         },
-        async (email, password, done) => {
+        async (req, email, password, done) => {
             try {
-                const user = await UserModel.create({ email, password });
+
+                // ACCESSING MORE USER PASSED DETAILS FROM THE REQUEST BODY
+                const username = req.body.username
+                const user = await UserModel.create({ username, email, password });
 
                 return done(null, user);
             } catch (error) {
