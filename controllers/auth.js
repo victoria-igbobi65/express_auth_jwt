@@ -9,9 +9,8 @@ require("dotenv").config();
 exports.signup = async (req, res, next) => {
 
   //SEND A MAIL TO A USER ANYTIME THEY SIGNUP 
-
   //MESSAGE TO SEND TO USER
-  const message = `Hey champ!\nWelcome to our site, we hope you make the most of your experience!\nWe would be rooting for you from over here!`
+  const message = `Hey champ ${req.user.username}!\nWelcome to our site, we hope you make the most of your experience!\nWe would be rooting for you from over here!`
   
   try{
 
