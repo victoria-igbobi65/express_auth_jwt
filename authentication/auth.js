@@ -31,7 +31,6 @@ passport.use(
         {
             usernameField: 'email',
             passwordField: 'password',
-
             // ALLOWS THE REQ PARAMATER TO BE PASSED INTO THE FUNCTION 
             passReqToCallback: true
         },
