@@ -1,5 +1,6 @@
 const User = require('../models/users')
 
+
 exports.getAllUser = async(req, res, next) =>{
     const users = await User
                             .find()
