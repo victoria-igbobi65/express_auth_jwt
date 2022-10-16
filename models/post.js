@@ -14,7 +14,6 @@ const PostSchema = new Schema({
     comments: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users',
-        unique: true
     }],
     posted_at: {
         type: Date
