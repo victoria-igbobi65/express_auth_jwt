@@ -10,6 +10,7 @@ authRouter.post(
     passport.authenticate('signup', { session: false }), authController.signup 
 );
 
+
 authRouter
     .route('/login')
     .post(authController.login)
