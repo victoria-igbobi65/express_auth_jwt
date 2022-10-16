@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 const PostSchema = new Schema({
-    body:{
+    post:{
         type: String,
         required: [true, 'post body required!']
     },
@@ -11,12 +11,15 @@ const PostSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
     }],
-    comments: {
+    comments: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users'
-    },
-    date: {
-        type: Date,
-        default: Date.now()
+        ref: 'users',
+        unique: true
+    }],
+    posted_at: {
+        type: Date
     }
 })
+
+const Post = mongoose.model('posts', PostSchema)
+module.exports=Post

@@ -11,6 +11,8 @@ exports.signup = async (req, res, next) => {
   //SEND A MAIL TO A USER ANYTIME THEY SIGNUP 
   //MESSAGE TO SEND TO USER
   const message = `Hey champ ${req.user.username}!\nWelcome to our site, we hope you make the most of your experience!\nWe would be rooting for you from over here!`
+  const body = {_id: req.user._id, email: req.user.email}
+   
   
   try{
 
@@ -22,9 +24,11 @@ exports.signup = async (req, res, next) => {
     })
 
     // SUCCESS RESPONSE
+    const token = jwt.sign({ user: body }, process.env.JWT_SECRET);
     res.json({
        message: "Signup successful",
        user: req.user,
+       token
      });
 
 
