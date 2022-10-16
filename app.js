@@ -10,7 +10,6 @@ const userRoute = require('./routes/users')
 
 
 
-
 require("./authentication/auth") // Signup and login authentication middleware
 const app = express();
 
