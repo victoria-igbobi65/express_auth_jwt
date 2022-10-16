@@ -15,6 +15,7 @@ exports.createPost = async (req, res, next) =>{
         post: req.body.post,
         posted_at: moment().toDate()
     })
+    
 
     //SAVE THE ID OF THE NEW POST TO THE ARRAY OF POSTS BELONGING TO THE USER IN THE USER MODEL
     user.posts = user.posts.concat(newPost._id)
@@ -28,5 +29,5 @@ exports.createPost = async (req, res, next) =>{
 }
 
 exports.getPostById = (req, res, next) => {
-    
+
 }
