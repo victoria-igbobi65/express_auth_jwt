@@ -4,8 +4,9 @@ const bodyParser = require('body-parser');
 const AppError = require('./utils/appError')
 const globalErrorHandler = require('./controllers/error')
 
-const booksRoute = require('./routes/books');
 const authRoute = require('./routes/auth');
+const postRoute = require('./routes/post')
+const userRoute = require('./routes/users')
 
 
 
@@ -15,9 +16,9 @@ const app = express();
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use('/', authRoute);
-app.use('/books', passport.authenticate('jwt', { session: false }), booksRoute);
+app.use('/post', passport.authenticate('jwt', { session: false }), postRoute)
+app.use("/user", passport.authenticate("jwt", { session: false }), userRoute);
 
 
 // renders the home page
