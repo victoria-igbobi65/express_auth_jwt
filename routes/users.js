@@ -8,5 +8,8 @@ userRouter
     .route('/')
     .get(userController.getAllUser)
 
-
+userRouter
+    .route('/:id')
+    .get(userController.getUserById)
+    .delete(userController.deleteUserById)
 module.exports=userRouter
