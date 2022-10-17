@@ -9,7 +9,8 @@ const PostSchema = new Schema({
     },
     likes:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'users',
+        unique: true
     }],
     comments: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -19,6 +20,15 @@ const PostSchema = new Schema({
         type: Date
     }
 })
+
+PostSchema.methods.likes = async function(userID){
+    if (!userID){
+        return false
+    }
+
+    this.likes = this.likes.concat(userID)
+    return true
+}
 
 
 const Post = mongoose.model('posts', PostSchema)
