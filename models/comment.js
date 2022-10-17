@@ -6,7 +6,7 @@ const Schema = moogoose.Schema;
 
 //Define book schema
 const CommentSchema = new Schema({
-    Body:{
+    comment:{
         type: String,
         required: [true, 'Post must have a body!']
     },
@@ -15,14 +15,9 @@ const CommentSchema = new Schema({
         ref: 'users',
         required: [true, 'please provide user ID!']
     },
-    post_id:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'posts',
-        required: [true, 'post ID required!']
-    },
     date:{
         type: Date,
-        default: Date.now()
+        required: true
     }
 })
 
