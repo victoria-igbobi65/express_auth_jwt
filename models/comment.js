@@ -13,11 +13,10 @@ const CommentSchema = new Schema({
     user_id:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users',
-        required: [true, 'please provide user ID!']
+        //required: [true, 'please provide user ID!']
     },
     date:{
         type: Date,
-        required: true
     }
 })
 
