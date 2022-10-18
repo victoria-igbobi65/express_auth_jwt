@@ -1,52 +1,63 @@
+const mongoose = require('mongoose')
+
 const Comment = require('../models/comment')
-const Post = require('../models/post')
+const Post = mongoose.model('posts')
 const AppError = require('../utils/appError')
 const moment = require('moment')
 
-
 exports.writeComment = async (req, res, next) => {
-    try{
-        const { id } = req.params;
-        const newComment = req.body.comment;
+  res.end(req.url)
+    // try{
 
-        const comment = await Comment.create({
-          comment: newComment,
-          date: moment().toDate(),
-        }).exec();
 
-        const post = await Post.findById(id).exec();
+    //     console.log(req.url)
+    //     const { id } = req.params;
+    //     const newComment = req.body.comment;
+        
+    //     console.log(id)
+    //     const comment = await Comment.create({
+    //       comment: newComment,
+    //       user_id: req.user_id,
+    //       date: moment().toDate(),
+    //     }).exec();
 
-        if (!post) {
-          next(new AppError("Post with ID doesn't exist!", 404));
-        }
+    //     const post = await Post.findById(id).exec();
 
-        post.comments = post.comments.concat(newComment._id);
-        await post.save();
+    //     if (!post) {
+    //       next(new AppError("Post with ID doesn't exist!", 404));
+    //     }
 
-        return res.status(200).json({
-          status: false,
-          newComment,
-        });
-    }
-    catch(err){
-        return res.status(400).json({
-            status: false,
-            err
-        })
-    }
+    //     post.comments = post.comments.concat(newComment._id);
+    //     await post.save();
+
+    //     return res.status(200).json({
+    //       status: false,
+    //       comment,
+    //     });
+    // }
+    // catch(err){
+    //     return res.status(400).json({
+    //         status: false,
+    //         err
+    //     })
+    // }
 }
 
 exports.deleteComment = async (req, res, next) => {
-    const {postID, commentID} = req.params
+  console.log('Hey')
 
-    //const post = await Post.findById(postID)
-    const comment = await Comment.findById(commentID)
+//   const {postID, commentID} = req.params
+//  //const post = await Post.findById(postID)
+//   const comment = await Comment.findById(commentID)
+//   if (!comment){
+//     return next(new AppError("comment with thus ID doesn't exist!", 404))
+//   }
+//   Comment.findByIdAndDelete(commentID)
+//   Post.updateOne({_id: postID}, {$pull: {comments: commentID}})
 
-    if (!comment){
-        return next(new AppError("comment with thus ID doesn't exist!", 404))
-    }
-
-    Comment.findByIdAndDelete(commentID)
-    Post.updateOne({_id: postID}, {$pull: {comments: commentID}})
+//   return res.status(200).json({
+//     status: false,
+//     message: null
+//   })
     
 }
