@@ -1,4 +1,6 @@
-const Post = require('../models/post')
+const mongoose = require('mongoose')
+
+const Post = mongoose.model('posts')
 const User = require('../models/users')
 const AppError = require('../utils/appError')
 
