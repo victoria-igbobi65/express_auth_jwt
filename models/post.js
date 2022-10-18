@@ -21,7 +21,7 @@ const PostSchema = new Schema({
     }
 })
 
-PostSchema.methods.likes = async function(userID){
+PostSchema.methods.like = async function(userID){
     if (!userID){
         return false
     }
@@ -31,5 +31,4 @@ PostSchema.methods.likes = async function(userID){
 }
 
 
-const Post = mongoose.model('posts', PostSchema)
-module.exports=Post
+module.exports = mongoose.model("posts", PostSchema);
