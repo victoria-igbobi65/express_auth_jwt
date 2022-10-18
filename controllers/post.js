@@ -1,4 +1,5 @@
-const Post = require('../models/post')
+const mongoose = require('mongoose')
+const Post = mongoose.model('posts')
 const User = require('../models/users')
 const moment = require('moment')
 
@@ -62,9 +63,10 @@ exports.getPostById = async (req, res, next) => {
 exports.getAllPost = async (req, res, next) => {
     try{
 
-        const posts = await Post
-                                .find()
-                                .populate('users')
+        const posts = await Post.find({}).populate()
+                                // .find()
+                                // .populate('users')
+                                // .exec()
         
 
         return res
